@@ -8,10 +8,6 @@ class FileManager:
         except FileNotFoundError:
             print(f"The file {filename} not found")
             return None
-        pass
-        # TODO:
-        # Implement a process that reads the contents of the `filename` file 
-        # and returns the text.
 
     def save_data(self, filename, data):
         pass
