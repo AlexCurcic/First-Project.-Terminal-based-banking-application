@@ -25,10 +25,12 @@ class FileManager:
             return None
         
     def write_json(self, list_of_dicts, json_file_path):
-        pass
-        # TODO:
-        # Implement a process that writes a list of dictionaries from list_of_dicts to the `json_file_path` file
-
+        try:
+            with open(json_file_path, 'w') as file:
+                json.dump(list_of_dicts, file, indent = 4)
+        except Exception as e:
+            print(f"An error occurred while writing JSON to the file {json_file_path}: {e}")
+        
     def add_to_json(self, data, json_file_path):
         pass
         # TODO:
