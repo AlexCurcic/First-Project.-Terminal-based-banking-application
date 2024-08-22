@@ -32,8 +32,15 @@ class FileManager:
             print(f"An error occurred while writing JSON to the file {json_file_path}: {e}")
         
     def add_to_json(self, data, json_file_path):
-        pass
-        # TODO:
-        # Implement a process that gets the dictionary in the data variable and adds it to the JSON `json_file_path`
+        try:
+            json_data = self.read_json(json_file_path)
+            if json_data is None:
+                json_data = []
+            json_data.append(data)
+            self.write_json(json_data, json_file_path)
+        except Exception as e:
+            print(f"An error occurred while adding data to the JSON file {json_file_path}: {e}")
+
+        
 
             
