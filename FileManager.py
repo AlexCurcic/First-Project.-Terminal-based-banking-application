@@ -17,10 +17,12 @@ class FileManager:
             print(f"An error occurred while writing to the file {filename}: {e}")
         
     def read_json(self, json_file_path):
-        pass
-        # TODO:
-        # Implement a process that reads the contents of a file whose path is stored in the `json_file_path` variable 
-        # and returns a list of dictionaries
+        try:
+            with open(json_file_path, "r") as file:
+                return json.load(file)
+        except FileNotFoundError:
+            print(f"The file {json_file_path} not found.")
+            return None
         
     def write_json(self, list_of_dicts, json_file_path):
         pass
