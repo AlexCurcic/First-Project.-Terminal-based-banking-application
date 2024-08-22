@@ -10,10 +10,12 @@ class FileManager:
             return None
 
     def save_data(self, filename, data):
-        pass
-        # TODO:
-        # Implement a process that writes the contents of `data` to the file `filename`
-
+        try:
+            with open(filename, "w") as file:
+                file.write(data)
+        except Exception as e:
+            print(f"An error occurred while writing to the file {filename}: {e}")
+        
     def read_json(self, json_file_path):
         pass
         # TODO:
