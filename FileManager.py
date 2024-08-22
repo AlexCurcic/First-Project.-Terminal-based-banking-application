@@ -2,6 +2,12 @@ import json
 
 class FileManager:
     def load_data(self, filename):
+        try:
+            with open(filename, "r") as file:
+                return file.read()
+        except FileNotFoundError:
+            print(f"The file {filename} not found")
+            return None
         pass
         # TODO:
         # Implement a process that reads the contents of the `filename` file 
