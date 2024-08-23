@@ -18,41 +18,40 @@ class Account:
                 self.balance += amount
                 history_message = HistoryMessages.deposit("success", amount, self.balance)
             else:
-                print("Invalid amount input for deposit! Please enter positive integer number!")
+                print("Invalid amount for deposit!")
                 history_message = HistoryMessages.deposit("failure", amount, self.balance)
 
         except ValueError:
-            print("Invalid amount input for deposit! Please enter positive integer number!" )
+            print("Invalid amount for deposit!" )
             return
 
         self.write_to_history(history_message)
-        
+
 
     def debit(self, amount):
-        pass
-        # TODO:
-        # implement account debits with all necessary checks
-        # amount must be a integer greater than 0
-        # if amount is greater than the amount in the account (insufficient funds) the operation should not work
+        try:
+            amount = int(amount)
+            if amount > 0 and amount <= self.balance:
+                self.balance -= amount
+                history_message = HistoryMessages.debit("success", amount, self.balance)
+            else:
+                history_message = HistoryMessages.debit("failure", amount, self.balance)
+                print("Invalid amount for debit!")
+        except ValueError:
+            print("Invalid amount for debit!")
+            return
 
-        # in case of positive outcome use this construct to write to JSON file
+        self.write_to_history(history_message)
 
-        # history_message = HistoryMessages.debit("success", amount, self.balance)
-        # self.write_to_history(history_message)
-
-        # in case of a negative outcome, use this construct to write to a JSON file
-        
-        # history_message = HistoryMessages.debit("failure", amount, self.balance)
-        # self.write_to_history(history_message)
 
     def get_balance(self):
         return self.balance
 
     def dict_to_string(self, dict):
         if dict["operation_type"] != "exchange":
-            return f'type: {dict["operation_type"]} status: {dict["status"]} amount: {dict["amount_of_deposit"]} balance: {dict["total_balance"]}'
+            return f"type: {dict["operation_type"]} status: {dict["status"]} amount: {dict["amount_of_deposit"]} balance: {dict["total_balance"]}"
         else:
-            return f'type: {dict["operation_type"]} status: {dict["status"]} pre exchange amount: {dict["pre_exchange_amount"]} exchange amount: {dict["exchange_amount"]} currency from: {dict["currency_from"]} currency to: {dict["currency_to"]}'
+            return f"type: {dict["operation_type"]} status: {dict["status"]} pre exchange amount: {dict["pre_exchange_amount"]} exchange amount: {dict["exchange_amount"]} currency from: {dict["currency_from"]} currency to: {dict["currency_to"]}"
         
 
     def get_history(self):
