@@ -55,7 +55,8 @@ class Account:
         
 
     def get_history(self):
-        pass
-        # TODO:
-        # implement a process that returns transaction history line by line
-        # use the dict_to_string method to create a string from a dictionary
+        history = self.file_manager.read_json(self.hist_file_path)
+        history_str = ""
+        for entry in history:
+            history_str += self.dict_to_string(entry) + "\n"
+        return history_str
