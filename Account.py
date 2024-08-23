@@ -12,20 +12,21 @@ class Account:
         self.file_manager.add_to_json(hist_dict, self.hist_file_path)
 
     def deposit(self, amount):
-        pass
-        # TODO:
-        # implement the deposit process with all necessary checks
-        # amount must be a integer greater than 0
+        try:
+            amount = int(amount)
+            if amount > 0:
+                self.balance += amount
+                history_message = HistoryMessages.deposit("success", amount, self.balance)
+            else:
+                print("Invalid amount input for deposit! Please enter positive integer number!")
+                history_message = HistoryMessages.deposit("failure", amount, self.balance)
+
+        except ValueError:
+            print("Invalid amount input for deposit! Please enter positive integer number!" )
+            return
+
+        self.write_to_history(history_message)
         
-        # in case of a positive outcome, use this construct to write it to a JSON file
-
-        # history_message = HistoryMessages.deposit("success", amount, self.balance)
-        # self.write_to_history(history_message)
-
-        # in case of a negative outcome, use this construct to write to the JSON file
-            
-        # history_message = HistoryMessages.deposit("failure", amount, self.balance)
-        # self.write_to_history(history_message)
 
     def debit(self, amount):
         pass
