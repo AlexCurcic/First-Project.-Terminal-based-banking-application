@@ -1,5 +1,6 @@
 from FileManager import FileManager
 from HistoryMessages import HistoryMessages
+import requests
 
 class CurrencyExchange:
     def __init__(self, balance = 0):
@@ -11,9 +12,12 @@ class CurrencyExchange:
         self.file_manager.add_to_json(hist_dict, self.hist_file_path)
 
     def get_exchange_rates(self):
-        pass
-        # Implement a process that sends a get request to the link 
-        # and returns the resulting dictionary.
+        try:
+            exch_rates = request.get("https://fake-api.apps.berlintech.ai/api/currency_exchange").json()
+            return exch_rates 
+        except Exception as e:
+            print(f"Request Error: {e}")
+            return None
     
     def exchange_currency(self, currency_from, currency_to, amount):
         pass
