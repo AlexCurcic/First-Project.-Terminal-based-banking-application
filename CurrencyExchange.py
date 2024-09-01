@@ -13,7 +13,7 @@ class CurrencyExchange:
 
     def get_exchange_rates(self):
         try:
-            exch_rates = request.get("https://fake-api.apps.berlintech.ai/api/currency_exchange").json()
+            exch_rates = requests.get("https://fake-api.apps.berlintech.ai/api/currency_exchange").json()
             return exch_rates 
         except Exception as e:
             print(f"Request Error: {e}")
